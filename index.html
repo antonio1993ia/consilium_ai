@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -160,9 +159,9 @@
         }
         
         .solution p {
-             max-width: 800px;
-             margin: 0 auto;
-             color: var(--medium-text);
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--medium-text);
         }
 
         /* --- Toolkit Section --- */
@@ -243,7 +242,12 @@
             overflow: hidden;
             border: 1px solid transparent;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            /* Aggiungi queste 3 righe per il layout verticale */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
+
 
         .module-card::before {
             content: '';
@@ -269,6 +273,11 @@
         .module-card-content {
             position: relative;
             z-index: 2;
+            /* Aggiungi queste 3 righe per il layout verticale */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Occupa tutto lo spazio della card */
         }
 
         .module-card .module-title {
@@ -295,6 +304,31 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        .module-power-wrapper {
+            text-align: center;
+            margin-top: 2rem; /* Aggiunge spazio sopra */
+            padding-top: 1.5rem; /* Aggiunge ulteriore spazio */
+            border-top: 1px solid var(--border-color); /* Linea di separazione */
+        }
+
+        .module-power-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--medium-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem; /* Spazio tra il titolo e il testo del potere */
+        }
+
+        .module-power-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--primary-accent-start), var(--primary-accent-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.4;
+        }
         
         /* --- CTA / Who For Section --- */
         .who-for-section {
@@ -319,7 +353,7 @@
         }
 
         .who-for-section li:hover {
-             transform: translateX(10px);
+            transform: translateX(10px);
         }
 
         .final-cta {
@@ -360,11 +394,107 @@
                 padding: 0 1rem;
             }
             .modules-grid, .problem-grid {
-                 grid-template-columns: 1fr;
+                grid-template-columns: 1fr;
             }
             .btn {
                 padding: 1rem 1.8rem;
                 font-size: 1rem;
+            }
+        }
+
+        /* --- Form Styles --- */
+        .contact-section {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-form label {
+            margin-bottom: 0.5rem;
+            color: var(--medium-text);
+            font-weight: 600;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            background-color: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--light-text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-accent-start);
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* --- General Components --- */
+        .btn {
+            display: inline-block;
+            background-image: linear-gradient(90deg, var(--primary-accent-start) 0%, var(--primary-accent-end) 100%);
+            color: #0D1117; /* Dark text for contrast on bright button */
+            padding: 1.1rem 2.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px -10px var(--primary-accent-end);
+        }
+        
+        /* --- Footer Styles --- */
+        .final-cta {
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .footer-info {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--medium-text);
+            font-size: 0.9rem;
+        }
+
+        .footer-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .container { padding: 0 1rem; }
+            .modules-grid, .problem-grid { grid-template-columns: 1fr; }
+            .btn { padding: 1rem 1.8rem; font-size: 1rem; }
+            .hero, .problem-section, .solution, .toolkit-section, .journey-section, .who-for-section, .contact-section, .final-cta {
+                padding: 80px 0;
             }
         }
     </style>
@@ -464,46 +594,77 @@
         </section>
 
         <section class="journey-section">
-            <div class="container">
-                <h2 class="section-title reveal">Il Tuo Viaggio di 2 Ore: da Zero a Eroe della AI Governance</h2>
-                <div class="modules-grid">
-                    <div class="module-card reveal">
-                        <div class="module-card-content">
-                            <h3 class="module-title"><span>🗺️</span>Modulo 1: Mappa il Campo di Battaglia</span></h3>
+        <div class="container">
+            <h2 class="section-title reveal">Il Tuo Viaggio di 2 Ore: da Zero a Eroe della AI Governance</h2>
+            <div class="modules-grid">
+                
+                <div class="module-card reveal">
+                    <div class="module-card-content">
+                        <div>
+                            <h3 class="module-title"><span>🗺️</span>Modulo 1: Mappa il Campo di Battaglia</h3>
                             <p class="module-description">Analizza in un lampo i punti di forza della tua azienda, le mosse dei competitor e il panorama legale.</p>
-                            <p class="module-power">Il Tuo Nuovo Potere: Prendi decisioni strategiche basate sui dati, non sulle sensazioni.</p>
                         </div>
-                    </div>
-                    <div class="module-card reveal">
-                         <div class="module-card-content">
-                            <h3 class="module-title"><span>⚖️</span>Modulo 2: Costruisci la Tua Fortezza Legale</span></h3>
-                            <p class="module-description">Padroneggia gli essenziali di GDPR e EU AI Act con checklist semplici e pronte all'uso.</p>
-                            <p class="module-power">Il Tuo Nuovo Potere: Smetti di temere le autorità e costruisci soluzioni di cui i clienti si fidano.</p>
-                        </div>
-                    </div>
-                    <div class="module-card reveal">
-                         <div class="module-card-content">
-                            <h3 class="module-title"><span>📋</span>Modulo 3: Schiera il Tuo Esercito</span></h3>
-                            <p class="module-description">Crea una AI Policy chiara e definisci esattamente chi fa cosa. Costruisci il tuo organigramma AI.</p>
-                            <p class="module-power">Il Tuo Nuovo Potere: Efficienza. Niente più caos. Tutti conoscono il proprio ruolo.</p>
-                        </div>
-                    </div>
-                     <div class="module-card reveal">
-                         <div class="module-card-content">
-                            <h3 class="module-title"><span>🚀</span>Modulo 4: Lancia Missioni Perfette</span></h3>
-                            <p class="module-description">Gestisci un progetto AI dall'inizio alla fine con le migliori pratiche per dati, sviluppo e rilascio.</p>
-                            <p class="module-power">Il Tuo Nuovo Potere: Successo. Aumenta drasticamente le probabilità che i tuoi progetti diano un valore reale.</p>
-                        </div>
-                    </div>
-                     <div class="module-card reveal">
-                         <div class="module-card-content">
-                            <h3 class="module-title"><span>📈</span>Modulo 5: Resta Sempre un Passo Avanti</span></h3>
-                            <p class="module-description">Impara a monitorare i tuoi sistemi, condurre audit e usare un ciclo di miglioramento continuo.</p>
-                            <p class="module-power">Il Tuo Nuovo Potere: Dominio. Evolvi e adattati per mantenere il tuo vantaggio competitivo.</p>
+                        <div class="module-power-wrapper">
+                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
+                            <p class="module-power-text">Prendi decisioni strategiche basate sui dati, non sulle sensazioni.</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="module-card reveal">
+                    <div class="module-card-content">
+                        <div>
+                            <h3 class="module-title"><span>⚖️</span>Modulo 2: Costruisci la Tua Fortezza Legale</h3>
+                            <p class="module-description">Padroneggia gli essenziali di GDPR e EU AI Act con checklist semplici e pronte all'uso.</p>
+                        </div>
+                        <div class="module-power-wrapper">
+                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
+                            <p class="module-power-text">Smetti di temere le autorità e costruisci soluzioni di cui i clienti si fidano.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-card reveal">
+                    <div class="module-card-content">
+                        <div>
+                            <h3 class="module-title"><span>📋</span>Modulo 3: Schiera il Tuo Esercito</h3>
+                            <p class="module-description">Crea una AI Policy chiara e definisci esattamente chi fa cosa. Costruisci il tuo organigramma AI.</p>
+                        </div>
+                        <div class="module-power-wrapper">
+                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
+                            <p class="module-power-text">Efficienza. Niente più caos. Tutti conoscono il proprio ruolo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-card reveal">
+                    <div class="module-card-content">
+                        <div>
+                            <h3 class="module-title"><span>🚀</span>Modulo 4: Lancia Missioni Perfette</h3>
+                            <p class="module-description">Gestisci un progetto AI dall'inizio alla fine con le migliori pratiche per dati, sviluppo e rilascio.</p>
+                        </div>
+                        <div class="module-power-wrapper">
+                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
+                            <p class="module-power-text">Successo. Aumenta drasticamente le probabilità che i tuoi progetti diano un valore reale.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-card reveal">
+                    <div class="module-card-content">
+                        <div>
+                            <h3 class="module-title"><span>📈</span>Modulo 5: Resta Sempre un Passo Avanti</h3>
+                            <p class="module-description">Impara a monitorare i tuoi sistemi, condurre audit e usare un ciclo di miglioramento continuo.</p>
+                        </div>
+                        <div class="module-power-wrapper">
+                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
+                            <p class="module-power-text">Dominio. Evolvi e adattati per mantenere il tuo vantaggio competitivo.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+        </div>
         </section>
         
         <section class="who-for-section">
@@ -520,15 +681,45 @@
             </div>
         </section>
 
+
+        <section class="contact-section">
+            <div class="container reveal">
+                <h2 class="section-title" style="text-align: center;">Pronto a Iniziare?</h2>
+                <p class="section-subtitle" style="text-align: center;">Lascia i tuoi dati per iscriverti o richiedere maggiori informazioni. Ti risponderemo al più presto.</p>
+                
+                <form action="https://formspree.io/f/xwpbvbwv" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Il Tuo Nome</label>
+                        <input type="text" id="name" name="name" placeholder="Mario Rossi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">La Tua Email</label>
+                        <input type="email" id="email" name="email" placeholder="mario.rossi@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Messaggio (Opzionale)</label>
+                        <textarea id="message" name="message" placeholder="Vorrei sapere di più su..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="justify-self: center;">Invia Iscrizione</button>
+                </form>
+            </div>
+        </section>
+        </main>
+
+        <footer class="final-cta">
+            <div class="container">
+
+
+                <div class="footer-info reveal">
+                    <p><strong>Consilium AI</strong></p>
+                    <p>Indirizzo: Via Giolitti 63, Pesaro (PU), Italia</p>
+                    <p>P.IVA: 02833410414</p>
+                </div>
+                </div>
+        </footer>
+
     </main>
 
-    <footer class="final-cta">
-        <div class="container reveal">
-            <h2 class="section-title">Smetti di essere uno spettatore.</h2>
-            <p class="section-subtitle" style="margin-bottom: 2.5rem;">Con il Blueprint AIMS, hai gli strumenti e la conoscenza per guidare la rivoluzione AI.</p>
-            <a href="#" class="btn">Iscriviti Ora e Padroneggia la AI Governance</a>
-        </div>
-    </footer>
 
     <script>
         // Simple Intersection Observer for scroll animations
