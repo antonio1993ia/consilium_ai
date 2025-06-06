@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consilium AI - Il Blueprint AIMS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --dark-bg: #0D1117;
+            --light-text: #F0F6FC;
+            --medium-text: #8B949E;
+            --primary-accent-start: #22D3EE; /* Cyan */
+            --primary-accent-end: #A78BFA;   /* Violet */
+            --card-bg: #161B22;
+            --border-color: #30363D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        
+        /* --- Animated Gradient Background --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(13, 17, 23, 0), rgba(167, 139, 250, 0.1));
+            z-index: -1;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Scroll Animation Setup --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Header / Hero Section --- */
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--primary-accent-start), var(--primary-accent-end), var(--light-text));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: text-shine 8s linear infinite;
+        }
+
+        @keyframes text-shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--medium-text);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* --- Problem Section --- */
+        .problem-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            margin-bottom: 4rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .problem-card {
+            background: rgba(22, 27, 34, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-accent-start);
+        }
+        
+        .problem-card p {
+            color: var(--medium-text);
+        }
+
+        /* --- Solution Section --- */
+        .solution {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .solution p {
+             max-width: 800px;
+             margin: 0 auto;
+             color: var(--medium-text);
+        }
+
+        /* --- Toolkit Section --- */
+        .toolkit-section {
+            padding: 100px 0;
+        }
+
+        .toolkit-section .section-title, .toolkit-section .section-subtitle {
+            text-align: center;
+        }
+        
+        .toolkit-section .tagline {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            color: var(--light-text);
+        }
+
+        .toolkit-table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--card-bg);
+        }
+
+        .toolkit-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .toolkit-table th, .toolkit-table td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .toolkit-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .toolkit-table th {
+            color: var(--primary-accent-start);
+            font-size: 1.1rem;
+        }
+
+        .toolkit-table td:nth-child(2) {
+            color: var(--light-text);
+            font-weight: 600;
+        }
+        
+        .toolkit-table td {
+            color: var(--medium-text);
+        }
+        
+        /* --- Course Journey Section --- */
+        .journey-section {
+            padding: 100px 0;
+            background-color: var(--dark-bg);
+        }
+        
+        .journey-section .section-title {
+            text-align: center;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .module-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--primary-accent-start), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .module-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-color);
+        }
+        
+        .module-card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-card .module-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .module-card .module-title span {
+            font-size: 2.2rem;
+            margin-right: 0.75rem;
+            vertical-align: middle;
+        }
+        
+        .module-card .module-description {
+            color: var(--medium-text);
+            margin-bottom: 1.5rem;
+        }
+        
+        .module-card .module-power {
+            font-weight: 600;
+            color: var(--primary-accent-start);
+            background: linear-gradient(90deg, var(--primary-accent-start), var(--primary-accent-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* --- CTA / Who For Section --- */
+        .who-for-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .who-for-section ul {
+            list-style-type: none;
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: left;
+        }
+        
+        .who-for-section li {
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            background-image: linear-gradient(to right, rgba(34, 211, 238, 0.1), rgba(22, 27, 34, 0));
+            border-left: 3px solid var(--primary-accent-start);
+            transition: transform 0.3s;
+        }
+
+        .who-for-section li:hover {
+             transform: translateX(10px);
+        }
+
+        .final-cta {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--dark-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- General Components --- */
+        .btn {
+            display: inline-block;
+            background-image: linear-gradient(90deg, var(--primary-accent-start) 0%, var(--primary-accent-end) 100%);
+            color: var(--dark-bg);
+            padding: 1.1rem 2.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px -10px var(--primary-accent-end);
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            .modules-grid, .problem-grid {
+                 grid-template-columns: 1fr;
+            }
+            .btn {
+                padding: 1rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Stai Affrontando la Rivoluzione AI.</h1>
+            <p class="subtitle">Sei armato per vincere, o aspetti di essere travolto?</p>
+            <a href="#toolkit" class="btn">Scopri il Toolkit Operativo</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="problem-section">
+            <div class="container">
+                <h2 class="section-title reveal">Il campo di battaglia dell'AI è un campo minato</h2>
+                <p class="section-subtitle reveal">Navigare da soli è come guidare bendati. I rischi sono reali e terrificanti.</p>
+                <div class="problem-grid">
+                    <div class="problem-card reveal">
+                        <h3>Multe Milionarie</h3>
+                        <p>L'EU AI Act e il GDPR non sono suggerimenti. Sono leggi con sanzioni pronte a colpire la tua azienda.</p>
+                    </div>
+                    <div class="problem-card reveal">
+                        <h3>Soldi Buttati</h3>
+                        <p>9 progetti AI su 10 falliscono, trasformando investimenti enormi in polvere digitale. Il motivo? Mancanza di un piano.</p>
+                    </div>
+                    <div class="problem-card reveal">
+                        <h3>Danni alla Reputazione</h3>
+                        <p>Un algoritmo "sbagliato", una fuga di dati, e la fiducia che hai costruito in anni svanisce in un istante.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="solution">
+            <div class="container reveal">
+                <h2 class="section-title">Ecco il Tuo Vantaggio Competitivo</h2>
+                <p class="section-subtitle" style="font-size: 1.5rem; color: var(--primary-accent-start); font-weight: 600;">Il Blueprint AIMS di Consilium AI</p>
+                <p>Dimentica la teoria astratta. Questo è un manuale operativo testato sul campo, un "come si fa" per il mondo reale. Abbiamo distillato centinaia di pagine di normative complesse in un sistema semplice e azionabile. Abbiamo fatto noi il lavoro pesante, tu devi solo <strong>eseguire</strong>.</p>
+            </div>
+        </section>
+
+        <section id="toolkit" class="toolkit-section">
+            <div class="container">
+                <h2 class="section-title reveal">"Ok, quindi cosa ottengo in pratica?"</h2>
+                <p class="tagline reveal">Niente fuffa. Solo un potente arsenale di strumenti e conoscenza.</p>
+                
+                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;" class="reveal">Il Tuo Toolkit di AI Management "Pronto all'Uso"</h3>
+                <p class="section-subtitle reveal">Il tuo intero Sistema di Gestione AI in una scatola. La scorciatoia definitiva per una governance strutturata e professionale. Devi solo riempire gli spazi.</p>
+                
+                <div class="toolkit-table-wrapper reveal">
+                    <table class="toolkit-table">
+                        <thead>
+                            <tr>
+                                <th>Se Devi...</th>
+                                <th>Il Nostro Toolkit ti Dà...</th>
+                                <th>Il Risultato Immediato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Capire le tue Risorse?</td>
+                                <td>✅ Scheda di Valutazione Risorse</td>
+                                <td>Vedi subito punti di forza e gap critici, prima di spendere un euro.</td>
+                            </tr>
+                            <tr>
+                                <td>Analizzare i Competitor?</td>
+                                <td>✅ Checklist Analisi Competitiva</td>
+                                <td>Sai esattamente dove ti posizioni e puoi cogliere le opportunità che loro non vedono.</td>
+                            </tr>
+                            <tr>
+                                <td>Rispettare la Legge?</td>
+                                <td>✅ Checklist GDPR & EU AI Act</td>
+                                <td>Dormi sonni tranquilli. Segui un percorso di conformità chiaro, non tiri a indovinare.</td>
+                            </tr>
+                             <tr>
+                                <td>Definire Regole Aziendali?</td>
+                                <td>✅ Guida alla Creazione di AI Policy</td>
+                                <td>Il tuo team ha regole chiare, minimizzando l'errore umano e i rischi.</td>
+                            </tr>
+                            <tr>
+                                <td>Gestire Progetti AI?</td>
+                                <td>✅ Template per l'Intero Ciclo di Vita</td>
+                                <td>Gestisci i progetti con rigore, aumentando drasticamente le chance di successo.</td>
+                            </tr>
+                            <tr>
+                                <td>Controllare i Rischi?</td>
+                                <td>✅ Checklist Mitigazione Rischi</td>
+                                <td>Proteggi la tua azienda da bombe a orologeria tecniche, etiche e finanziarie.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey-section">
+            <div class="container">
+                <h2 class="section-title reveal">Il Tuo Viaggio di 2 Ore: da Zero a Eroe della AI Governance</h2>
+                <div class="modules-grid">
+                    <div class="module-card reveal">
+                        <div class="module-card-content">
+                            <h3 class="module-title"><span>🗺️</span>Modulo 1: Mappa il Campo di Battaglia</span></h3>
+                            <p class="module-description">Analizza in un lampo i punti di forza della tua azienda, le mosse dei competitor e il panorama legale.</p>
+                            <p class="module-power">Il Tuo Nuovo Potere: Prendi decisioni strategiche basate sui dati, non sulle sensazioni.</p>
+                        </div>
+                    </div>
+                    <div class="module-card reveal">
+                         <div class="module-card-content">
+                            <h3 class="module-title"><span>⚖️</span>Modulo 2: Costruisci la Tua Fortezza Legale</span></h3>
+                            <p class="module-description">Padroneggia gli essenziali di GDPR e EU AI Act con checklist semplici e pronte all'uso.</p>
+                            <p class="module-power">Il Tuo Nuovo Potere: Smetti di temere le autorità e costruisci soluzioni di cui i clienti si fidano.</p>
+                        </div>
+                    </div>
+                    <div class="module-card reveal">
+                         <div class="module-card-content">
+                            <h3 class="module-title"><span>📋</span>Modulo 3: Schiera il Tuo Esercito</span></h3>
+                            <p class="module-description">Crea una AI Policy chiara e definisci esattamente chi fa cosa. Costruisci il tuo organigramma AI.</p>
+                            <p class="module-power">Il Tuo Nuovo Potere: Efficienza. Niente più caos. Tutti conoscono il proprio ruolo.</p>
+                        </div>
+                    </div>
+                     <div class="module-card reveal">
+                         <div class="module-card-content">
+                            <h3 class="module-title"><span>🚀</span>Modulo 4: Lancia Missioni Perfette</span></h3>
+                            <p class="module-description">Gestisci un progetto AI dall'inizio alla fine con le migliori pratiche per dati, sviluppo e rilascio.</p>
+                            <p class="module-power">Il Tuo Nuovo Potere: Successo. Aumenta drasticamente le probabilità che i tuoi progetti diano un valore reale.</p>
+                        </div>
+                    </div>
+                     <div class="module-card reveal">
+                         <div class="module-card-content">
+                            <h3 class="module-title"><span>📈</span>Modulo 5: Resta Sempre un Passo Avanti</span></h3>
+                            <p class="module-description">Impara a monitorare i tuoi sistemi, condurre audit e usare un ciclo di miglioramento continuo.</p>
+                            <p class="module-power">Il Tuo Nuovo Potere: Dominio. Evolvi e adattati per mantenere il tuo vantaggio competitivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="who-for-section">
+            <div class="container reveal">
+                <h2 class="section-title">Questo Corso è per TE. Davvero.</h2>
+                <p class="section-subtitle">NON devi essere un data scientist o un genio della tecnologia. Questo corso è per le persone che mandano avanti il business.</p>
+                <ul>
+                    <li>Manager & Leader che devono prendere decisioni strategiche intelligenti.</li>
+                    <li>Team Legali & Compliance che devono tenere l'azienda fuori dai guai.</li>
+                    <li>Project Manager che devono consegnare i progetti AI nei tempi e nel budget.</li>
+                    <li>Professionisti IT & Security che devono gestire i rischi tecnici.</li>
+                    <li><strong>Chiunque</strong> voglia diventare la figura di riferimento indispensabile per l'AI nella propria organizzazione.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="final-cta">
+        <div class="container reveal">
+            <h2 class="section-title">Smetti di essere uno spettatore.</h2>
+            <p class="section-subtitle" style="margin-bottom: 2.5rem;">Con il Blueprint AIMS, hai gli strumenti e la conoscenza per guidare la rivoluzione AI.</p>
+            <a href="#" class="btn">Iscriviti Ora e Padroneggia la AI Governance</a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach(el => observer.observe(el));
+        
+        // Card hover effect for radial gradient
+        const cards = document.querySelectorAll('.module-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+
+    </script>
+
+</body>
+</html>
