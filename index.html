@@ -1,754 +1,254 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilium AI - Il Blueprint AIMS</title>
+    <title>Automazione e Insight Strategici per la tua Azienda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-        :root {
-            --dark-bg: #0D1117;
-            --light-text: #F0F6FC;
-            --medium-text: #8B949E;
-            --primary-accent-start: #22D3EE; /* Cyan */
-            --primary-accent-end: #A78BFA;   /* Violet */
-            --card-bg: #161B22;
-            --border-color: #30363D;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
         }
-        
-        /* --- Animated Gradient Background --- */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(13, 17, 23, 0), rgba(167, 139, 250, 0.1));
-            z-index: -1;
-            animation: gradient-animation 15s ease infinite;
+        .gradient-bg {
+            background: linear-gradient(120deg, #1e3a8a 0%, #3b0764 100%);
         }
-
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* --- Scroll Animation Setup --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Header / Hero Section --- */
-        .hero {
-            padding: 120px 0;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            background: linear-gradient(90deg, var(--primary-accent-start), var(--primary-accent-end), var(--light-text));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: text-shine 8s linear infinite;
-        }
-
-        @keyframes text-shine {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: var(--medium-text);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-        }
-
-        /* --- Problem Section --- */
-        .problem-section {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            color: var(--light-text);
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--medium-text);
-            margin-bottom: 4rem;
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            text-align: left;
-        }
-
-        .problem-card {
-            background: rgba(22, 27, 34, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .problem-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .problem-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-accent-start);
-        }
-        
-        .problem-card p {
-            color: var(--medium-text);
-        }
-
-        /* --- Solution Section --- */
-        .solution {
-            padding: 100px 0;
-            text-align: center;
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .solution p {
-            max-width: 800px;
-            margin: 0 auto;
-            color: var(--medium-text);
-        }
-
-        /* --- Toolkit Section --- */
-        .toolkit-section {
-            padding: 100px 0;
-        }
-
-        .toolkit-section .section-title, .toolkit-section .section-subtitle {
-            text-align: center;
-        }
-        
-        .toolkit-section .tagline {
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            color: var(--light-text);
-        }
-
-        .toolkit-table-wrapper {
-            overflow-x: auto;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            background-color: var(--card-bg);
-        }
-
-        .toolkit-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .toolkit-table th, .toolkit-table td {
-            padding: 1.25rem 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .toolkit-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .toolkit-table th {
-            color: var(--primary-accent-start);
-            font-size: 1.1rem;
-        }
-
-        .toolkit-table td:nth-child(2) {
-            color: var(--light-text);
-            font-weight: 600;
-        }
-        
-        .toolkit-table td {
-            color: var(--medium-text);
-        }
-        
-        /* --- Course Journey Section --- */
-        .journey-section {
-            padding: 100px 0;
-            background-color: var(--dark-bg);
-        }
-        
-        .journey-section .section-title {
-            text-align: center;
-        }
-        
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-        
-        .module-card {
-            background-color: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid transparent;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            /* Aggiungi queste 3 righe per il layout verticale */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-
-        .module-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--primary-accent-start), transparent 40%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        
-        .module-card:hover::before {
-            opacity: 0.1;
-        }
-        
-        .module-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--border-color);
-        }
-        
-        .module-card-content {
-            position: relative;
-            z-index: 2;
-            /* Aggiungi queste 3 righe per il layout verticale */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%; /* Occupa tutto lo spazio della card */
-        }
-
-        .module-card .module-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        .module-card .module-title span {
-            font-size: 2.2rem;
-            margin-right: 0.75rem;
-            vertical-align: middle;
-        }
-        
-        .module-card .module-description {
-            color: var(--medium-text);
-            margin-bottom: 1.5rem;
-        }
-        
-        .module-card .module-power {
-            font-weight: 600;
-            color: var(--primary-accent-start);
-            background: linear-gradient(90deg, var(--primary-accent-start), var(--primary-accent-end));
+        .gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .module-power-wrapper {
-            text-align: center;
-            margin-top: 2rem; /* Aggiunge spazio sopra */
-            padding-top: 1.5rem; /* Aggiunge ulteriore spazio */
-            border-top: 1px solid var(--border-color); /* Linea di separazione */
-        }
-
-        .module-power-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--medium-text);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.75rem; /* Spazio tra il titolo e il testo del potere */
-        }
-
-        .module-power-text {
-            font-size: 1.1rem;
-            font-weight: 600;
-            background: linear-gradient(90deg, var(--primary-accent-start), var(--primary-accent-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.4;
-        }
-        
-        /* --- CTA / Who For Section --- */
-        .who-for-section {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .who-for-section ul {
-            list-style-type: none;
-            max-width: 600px;
-            margin: 2rem auto;
-            text-align: left;
-        }
-        
-        .who-for-section li {
-            padding: 0.75rem 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            background-image: linear-gradient(to right, rgba(34, 211, 238, 0.1), rgba(22, 27, 34, 0));
-            border-left: 3px solid var(--primary-accent-start);
-            transition: transform 0.3s;
-        }
-
-        .who-for-section li:hover {
-            transform: translateX(10px);
-        }
-
-        .final-cta {
-            padding: 100px 0;
-            text-align: center;
-            background-color: var(--dark-bg);
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* --- General Components --- */
-        .btn {
-            display: inline-block;
-            background-image: linear-gradient(90deg, var(--primary-accent-start) 0%, var(--primary-accent-end) 100%);
-            color: var(--dark-bg);
-            padding: 1.1rem 2.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px -10px var(--primary-accent-end);
-        }
-        
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
-            }
-            .container {
-                padding: 0 1rem;
-            }
-            .modules-grid, .problem-grid {
-                grid-template-columns: 1fr;
-            }
-            .btn {
-                padding: 1rem 1.8rem;
-                font-size: 1rem;
-            }
-        }
-
-        /* --- Form Styles --- */
-        .contact-section {
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .contact-form {
-            max-width: 700px;
-            margin: 0 auto;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .contact-form label {
-            margin-bottom: 0.5rem;
-            color: var(--medium-text);
-            font-weight: 600;
-        }
-        
-        .contact-form input, .contact-form textarea {
-            background-color: var(--dark-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            color: var(--light-text);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--primary-accent-start);
-            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
-        }
-        
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* --- General Components --- */
-        .btn {
-            display: inline-block;
-            background-image: linear-gradient(90deg, var(--primary-accent-start) 0%, var(--primary-accent-end) 100%);
-            color: #0D1117; /* Dark text for contrast on bright button */
-            padding: 1.1rem 2.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px -10px var(--primary-accent-end);
-        }
-        
-        /* --- Footer Styles --- */
-        .final-cta {
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-        }
-        
-        .footer-info {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--medium-text);
-            font-size: 0.9rem;
-        }
-
-        .footer-info p {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2.2rem; }
-            .container { padding: 0 1rem; }
-            .modules-grid, .problem-grid { grid-template-columns: 1fr; }
-            .btn { padding: 1rem 1.8rem; font-size: 1rem; }
-            .hero, .problem-section, .solution, .toolkit-section, .journey-section, .who-for-section, .contact-section, .final-cta {
-                padding: 80px 0;
-            }
+        [x-cloak] { 
+            display: none !important; 
         }
     </style>
 </head>
-<body>
 
-    <header class="hero">
-        <div class="container">
-            <h1>Stai Affrontando la Rivoluzione AI.</h1>
-            <p class="subtitle">Sei armato per vincere, o aspetti di essere travolto?</p>
-            <a href="#toolkit" class="btn">Scopri il Toolkit Operativo</a>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <!-- Header / Navigazione -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-700">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter gradient-text">Consilium AI</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#metodo" class="hover:text-sky-400 transition-colors">Il Metodo</a>
+                <a href="#servizi" class="hover:text-sky-400 transition-colors">Servizi</a>
+                <a href="#soluzioni" class="hover:text-sky-400 transition-colors">Casi d'Uso</a>
+                <a href="#contatti" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg transition-transform hover:scale-105">Parla con un esperto</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-800">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#metodo" class="block py-2 hover:text-sky-400 transition-colors">Il Metodo</a>
+            <a href="#servizi" class="block py-2 hover:text-sky-400 transition-colors">Servizi</a>
+            <a href="#soluzioni" class="block py-2 hover:text-sky-400 transition-colors">Casi d'Uso</a>
+            <a href="#contatti" class="block mt-2 bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg text-center">Parla con un esperto</a>
         </div>
     </header>
 
     <main>
-        <section class="problem-section">
-            <div class="container">
-                <h2 class="section-title reveal">Il campo di battaglia dell'AI è un campo minato</h2>
-                <p class="section-subtitle reveal">Navigare da soli è come guidare bendati. I rischi sono reali e terrificanti.</p>
-                <div class="problem-grid">
-                    <div class="problem-card reveal">
-                        <h3>Multe Milionarie</h3>
-                        <p>L'EU AI Act e il GDPR non sono suggerimenti. Sono leggi con sanzioni pronte a colpire la tua azienda.</p>
+        <!-- Hero Section -->
+        <section class="relative py-20 md:py-32 text-center overflow-hidden">
+            <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
+            <div class="absolute inset-0 gradient-bg opacity-30"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
+                    Le risposte che cerchi, direttamente dai tuoi processi.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Combina intelligenza artificiale e business intelligence per trasformare le tue operazioni quotidiane in decisioni vincenti
+                </p>
+                <a href="#contatti" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform hover:scale-105 inline-block">
+                    Inizia da qui
+                </a>
+            </div>
+        </section>
+
+        <!-- Sezione: Il Nostro Metodo -->
+        <section id="metodo" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Partiamo dai tuoi processi, non dalla tecnologia</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Non vendiamo soluzioni preconfezionate. Ascoltiamo, analizziamo e costruiamo la soluzione su misura per il tuo problema più urgente.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <!-- Card 1 -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
+                            <i data-lucide="search" class="w-8 h-8 text-sky-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Analisi sul Campo</h3>
+                        <p class="text-gray-400">Veniamo in azienda e osserviamo i processi reali per individuare i colli di bottiglia che frenano la crescita e causano errori.</p>
                     </div>
-                    <div class="problem-card reveal">
-                        <h3>Soldi Buttati</h3>
-                        <p>9 progetti AI su 10 falliscono, trasformando investimenti enormi in polvere digitale. Il motivo? Mancanza di un piano.</p>
+                    <!-- Card 2 -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
+                            <i data-lucide="rocket" class="w-8 h-8 text-sky-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Prototipo Rapido (2-4 settimane)</h3>
+                        <p class="text-gray-400">Sviluppiamo una prima soluzione funzionante sul problema più critico. La testiamo insieme per misurarne l'impatto immediato.</p>
                     </div>
-                    <div class="problem-card reveal">
-                        <h3>Danni alla Reputazione</h3>
-                        <p>Un algoritmo "sbagliato", una fuga di dati, e la fiducia che hai costruito in anni svanisce in un istante.</p>
+                    <!-- Card 3 -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
+                            <i data-lucide="trending-up" class="w-8 h-8 text-sky-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Validazione e Crescita</h3>
+                        <p class="text-gray-400">Solo quando i risultati sono concreti e misurabili, estendiamo la soluzione ad altre aree, garantendo un investimento sicuro ed efficace.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="solution">
-            <div class="container reveal">
-                <h2 class="section-title">Ecco il Tuo Vantaggio Competitivo</h2>
-                <p class="section-subtitle" style="font-size: 1.5rem; color: var(--primary-accent-start); font-weight: 600;">Il Blueprint AIMS di Consilium AI</p>
-                <p>Dimentica la teoria astratta. Questo è un manuale operativo testato sul campo, un "come si fa" per il mondo reale. Abbiamo distillato centinaia di pagine di normative complesse in un sistema semplice e azionabile. Abbiamo fatto noi il lavoro pesante, tu devi solo <strong>eseguire</strong>.</p>
-            </div>
-        </section>
-
-        <section id="toolkit" class="toolkit-section">
-            <div class="container">
-                <h2 class="section-title reveal">"Ok, quindi cosa ottengo in pratica?"</h2>
-                <p class="tagline reveal">Niente fuffa. Solo un potente arsenale di strumenti e conoscenza.</p>
+        <!-- Sezione: Aree di Intervento (Servizi) -->
+        <section id="servizi" class="py-20 bg-gray-800/40">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Un'Offerta Completa per la Tua Trasformazione Digitale</h2>
+                </div>
                 
-                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;" class="reveal">Il Tuo Toolkit di AI Management "Pronto all'Uso"</h3>
-                <p class="section-subtitle reveal">Il tuo intero Sistema di Gestione AI in una scatola. La scorciatoia definitiva per una governance strutturata e professionale. Devi solo riempire gli spazi.</p>
-                
-                <div class="toolkit-table-wrapper reveal">
-                    <table class="toolkit-table">
-                        <thead>
-                            <tr>
-                                <th>Se Devi...</th>
-                                <th>Il Nostro Toolkit ti Dà...</th>
-                                <th>Il Risultato Immediato</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Capire le tue Risorse?</td>
-                                <td>✅ Scheda di Valutazione Risorse</td>
-                                <td>Vedi subito punti di forza e gap critici, prima di spendere un euro.</td>
-                            </tr>
-                            <tr>
-                                <td>Analizzare i Competitor?</td>
-                                <td>✅ Checklist Analisi Competitiva</td>
-                                <td>Sai esattamente dove ti posizioni e puoi cogliere le opportunità che loro non vedono.</td>
-                            </tr>
-                            <tr>
-                                <td>Rispettare la Legge?</td>
-                                <td>✅ Checklist GDPR & EU AI Act</td>
-                                <td>Dormi sonni tranquilli. Segui un percorso di conformità chiaro, non tiri a indovinare.</td>
-                            </tr>
-                             <tr>
-                                <td>Definire Regole Aziendali?</td>
-                                <td>✅ Guida alla Creazione di AI Policy</td>
-                                <td>Il tuo team ha regole chiare, minimizzando l'errore umano e i rischi.</td>
-                            </tr>
-                            <tr>
-                                <td>Gestire Progetti AI?</td>
-                                <td>✅ Template per l'Intero Ciclo di Vita</td>
-                                <td>Gestisci i progetti con rigore, aumentando drasticamente le chance di successo.</td>
-                            </tr>
-                            <tr>
-                                <td>Controllare i Rischi?</td>
-                                <td>✅ Checklist Mitigazione Rischi</td>
-                                <td>Proteggi la tua azienda da bombe a orologeria tecniche, etiche e finanziarie.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="space-y-20 max-w-5xl mx-auto">
+                    <!-- Servizio 1: Automazione -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold gradient-text mb-4">Automazione Intelligente dei Processi</h3>
+                            <p class="text-gray-400 mb-6">Eliminiamo le attività manuali, lente e ripetitive, potenziando gli strumenti che il tuo team già conosce e utilizza, come Excel.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Chatbot e Agenti AI:</strong> Per automatizzare le comunicazioni su WhatsApp e altri canali.</span></li>
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Potenziamento File Excel:</strong> Integriamo AI e automazioni direttamente nei tuoi fogli di calcolo.</span></li>
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Lettura Automatica Documenti:</strong> Estraiamo dati da PDF, immagini e fatture, azzerando il data entry.</span></li>
+                            </ul>
+                        </div>
+                        <img src="https://placehold.co/600x400/111827/38bdf8?text=Automazione" alt="Immagine rappresentativa dell'automazione" class="rounded-lg shadow-lg">
+                    </div>
+
+                    <!-- Servizio 2: Dati e BI -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <img src="https://placehold.co/600x400/111827/a78bfa?text=Dati+e+BI" alt="Immagine rappresentativa di dashboard e dati" class="rounded-lg shadow-lg md:order-last">
+                        <div>
+                            <h3 class="text-2xl font-bold gradient-text mb-4">Piattaforma Dati Unificata e BI</h3>
+                            <p class="text-gray-400 mb-6">Centralizziamo i tuoi dati dispersi in un'unica fonte di verità, rendendoli accessibili e utili per prendere decisioni rapide.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Integrazione e Centralizzazione:</strong> Creiamo un Data Warehouse unico per tutti i tuoi dati (ERP, CRM, file).</span></li>
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Dashboard e Report Interattivi:</strong> Trasformiamo i numeri in visualizzazioni chiare e aggiornate in tempo reale.</span></li>
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Data Governance e Compliance:</strong> Garantiamo sicurezza, trasparenza e conformità nella gestione dei dati.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Servizio 3: Formazione -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold gradient-text mb-4">Formazione e Abilitazione dei Team</h3>
+                            <p class="text-gray-400 mb-6">La tecnologia migliore è inutile se le persone non sanno come usarla. Rendiamo il tuo team autonomo e più efficiente.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Formazione sui Prodotti:</strong> Affianchiamo il tuo team per massimizzare il valore delle soluzioni che creiamo.</span></li>
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Corso "Office AI Boost":</strong> Insegniamo a usare l'AI in Word, Excel e PowerPoint per automatizzare il lavoro.</span></li>
+                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Corsi di AI Generativa:</strong> Dalle basi di ChatGPT alle applicazioni pratiche per il tuo business.</span></li>
+                            </ul>
+                        </div>
+                        <img src="https://placehold.co/600x400/111827/34d399?text=Formazione" alt="Immagine rappresentativa di un team in formazione" class="rounded-lg shadow-lg">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="journey-section">
-        <div class="container">
-            <h2 class="section-title reveal">Il Tuo Viaggio di 2 Ore: da Zero a Eroe della AI Governance</h2>
-            <div class="modules-grid">
-                
-                <div class="module-card reveal">
-                    <div class="module-card-content">
-                        <div>
-                            <h3 class="module-title"><span>🗺️</span>Modulo 1: Mappa il Campo di Battaglia</h3>
-                            <p class="module-description">Analizza in un lampo i punti di forza della tua azienda, le mosse dei competitor e il panorama legale.</p>
-                        </div>
-                        <div class="module-power-wrapper">
-                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
-                            <p class="module-power-text">Prendi decisioni strategiche basate sui dati, non sulle sensazioni.</p>
-                        </div>
+        <!-- Sezione: Soluzioni Integrate (Casi d'Uso) -->
+        <section id="soluzioni" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Molto più della somma delle parti</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">È nell'intersezione tra automazione e analytics che creiamo il maggior valore. Ecco alcuni esempi concreti.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card Caso d'Uso -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
+                        <div class="mb-4"><i data-lucide="bot" class="w-10 h-10 gradient-text"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Business Intelligence Aumentata</h3>
+                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Migliaia di commenti dei clienti sono impossibili da analizzare manualmente.</p>
+                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Una dashboard che mostra il "sentiment" dei clienti calcolato in tempo reale dalla nostra AI, spiegando il "perché" della loro insoddisfazione.</p>
+                    </div>
+                    <!-- Card Caso d'Uso -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
+                        <div class="mb-4"><i data-lucide="camera" class="w-10 h-10 gradient-text"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Dalla Foto al KPI Strategico</h3>
+                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> I listini prezzi dei fornitori arrivano solo come foto su WhatsApp.</p>
+                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un sistema che legge i prezzi dalle foto, li struttura e aggiorna istantaneamente la dashboard dei costi di acquisto.</p>
+                    </div>
+                    <!-- Card Caso d'Uso -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
+                        <div class="mb-4"><i data-lucide="mouse-pointer-click" class="w-10 h-10 gradient-text"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Report "One-Click"</h3>
+                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Ore perse ogni settimana per aggiornare report manualmente.</p>
+                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un bottone in Excel che aggiorna i dati, crea una presentazione PowerPoint e la invia via email. Tutto in pochi secondi.</p>
+                    </div>
+                    <!-- Card Caso d'Uso -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
+                        <div class="mb-4"><i data-lucide="mic" class="w-10 h-10 gradient-text"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Podcast Giornaliero dei KPI</h3>
+                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Il management non ha tempo di leggere report la mattina.</p>
+                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un podcast audio di 5 minuti, generato in automatico, che riassume i dati della BI, da ascoltare in auto.</p>
+                    </div>
+                    <!-- Card Caso d'Uso -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
+                        <div class="mb-4"><i data-lucide="file-signature" class="w-10 h-10 gradient-text"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Automazione Commerciale</h3>
+                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Preventivi online lenti e dati dei lead non analizzati.</p>
+                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un preventivatore web istantaneo che genera un PDF e invia i dati in tempo reale alla dashboard vendite.</p>
+                    </div>
+                    <!-- Card Caso d'Uso -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
+                        <div class="mb-4"><i data-lucide="activity" class="w-10 h-10 gradient-text"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Monitoraggio Operativo Live</h3>
+                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Mancanza di visibilità sui problemi in produzione in tempo reale.</p>
+                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un assistente AI che raccoglie via chat le segnalazioni degli operatori e le mostra su una dashboard per il management.</p>
                     </div>
                 </div>
-
-                <div class="module-card reveal">
-                    <div class="module-card-content">
-                        <div>
-                            <h3 class="module-title"><span>⚖️</span>Modulo 2: Costruisci la Tua Fortezza Legale</h3>
-                            <p class="module-description">Padroneggia gli essenziali di GDPR e EU AI Act con checklist semplici e pronte all'uso.</p>
-                        </div>
-                        <div class="module-power-wrapper">
-                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
-                            <p class="module-power-text">Smetti di temere le autorità e costruisci soluzioni di cui i clienti si fidano.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="module-card reveal">
-                    <div class="module-card-content">
-                        <div>
-                            <h3 class="module-title"><span>📋</span>Modulo 3: Schiera il Tuo Esercito</h3>
-                            <p class="module-description">Crea una AI Policy chiara e definisci esattamente chi fa cosa. Costruisci il tuo organigramma AI.</p>
-                        </div>
-                        <div class="module-power-wrapper">
-                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
-                            <p class="module-power-text">Efficienza. Niente più caos. Tutti conoscono il proprio ruolo.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="module-card reveal">
-                    <div class="module-card-content">
-                        <div>
-                            <h3 class="module-title"><span>🚀</span>Modulo 4: Lancia Missioni Perfette</h3>
-                            <p class="module-description">Gestisci un progetto AI dall'inizio alla fine con le migliori pratiche per dati, sviluppo e rilascio.</p>
-                        </div>
-                        <div class="module-power-wrapper">
-                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
-                            <p class="module-power-text">Successo. Aumenta drasticamente le probabilità che i tuoi progetti diano un valore reale.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="module-card reveal">
-                    <div class="module-card-content">
-                        <div>
-                            <h3 class="module-title"><span>📈</span>Modulo 5: Resta Sempre un Passo Avanti</h3>
-                            <p class="module-description">Impara a monitorare i tuoi sistemi, condurre audit e usare un ciclo di miglioramento continuo.</p>
-                        </div>
-                        <div class="module-power-wrapper">
-                            <p class="module-power-title">Il Tuo Nuovo Potere</p>
-                            <p class="module-power-text">Dominio. Evolvi e adattati per mantenere il tuo vantaggio competitivo.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        </section>
-        
-        <section class="who-for-section">
-            <div class="container reveal">
-                <h2 class="section-title">Questo Corso è per TE. Davvero.</h2>
-                <p class="section-subtitle">NON devi essere un data scientist o un genio della tecnologia. Questo corso è per le persone che mandano avanti il business.</p>
-                <ul>
-                    <li>Manager & Leader che devono prendere decisioni strategiche intelligenti.</li>
-                    <li>Team Legali & Compliance che devono tenere l'azienda fuori dai guai.</li>
-                    <li>Project Manager che devono consegnare i progetti AI nei tempi e nel budget.</li>
-                    <li>Professionisti IT & Security che devono gestire i rischi tecnici.</li>
-                    <li><strong>Chiunque</strong> voglia diventare la figura di riferimento indispensabile per l'AI nella propria organizzazione.</li>
-                </ul>
             </div>
         </section>
 
-
-        <section class="contact-section">
-            <div class="container reveal">
-                <h2 class="section-title" style="text-align: center;">Pronto a Iniziare?</h2>
-                <p class="section-subtitle" style="text-align: center;">Lascia i tuoi dati per iscriverti o richiedere maggiori informazioni. Ti risponderemo al più presto.</p>
-                
-                <form action="https://formspree.io/f/xwpbvbwv" method="POST" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Il Tuo Nome</label>
-                        <input type="text" id="name" name="name" placeholder="Mario Rossi" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">La Tua Email</label>
-                        <input type="email" id="email" name="email" placeholder="mario.rossi@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Messaggio (Opzionale)</label>
-                        <textarea id="message" name="message" placeholder="Vorrei sapere di più su..."></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="justify-self: center;">Invia Iscrizione</button>
-                </form>
+        <!-- Sezione CTA Finale -->
+        <section id="contatti" class="py-20 bg-gray-800/40">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Pronto a ottimizzare il tuo primo processo?</h2>
+                <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto mb-8">
+                    Non serve stravolgere tutta l'azienda. Partiamo da un singolo collo di bottiglia e ti mostriamo risultati concreti in poche settimane.
+                </p>
+                <a href="mailto:antonio@hemz.eu" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform hover:scale-105 inline-block">
+                    Richiedi un'analisi gratuita
+                </a>
             </div>
         </section>
-        </main>
-
-        <footer class="final-cta">
-            <div class="container">
-
-
-                <div class="footer-info reveal">
-                    <p><strong>Consilium AI</strong></p>
-                    <p>Indirizzo: Via Giolitti 63, Pesaro (PU), Italia</p>
-                    <p>P.IVA: 02833410414</p>
-                </div>
-                </div>
-        </footer>
-
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; Consilium AI 2015. Tutti i diritti riservati.</p>
+            <p class="text-sm mt-2">Via Nicolò Pelipario 9 Pesaro | P.IVA 02595530417</p>
+        </div>
+    </footer>
 
+    <!-- Script per AlpineJS (Tabs) e Lucide Icons e menu mobile -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
-        // Simple Intersection Observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+        lucide.createIcons();
 
-        const revealElements = document.querySelectorAll('.reveal');
-        revealElements.forEach(el => observer.observe(el));
-        
-        // Card hover effect for radial gradient
-        const cards = document.querySelectorAll('.module-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
+        // Menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
-
     </script>
-
 </body>
+
 </html>
