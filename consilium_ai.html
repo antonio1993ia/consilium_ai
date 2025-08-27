@@ -1,254 +1,301 @@
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Automazione e Insight Strategici per la tua Azienda</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .gradient-bg {
-            background: linear-gradient(120deg, #1e3a8a 0%, #3b0764 100%);
-        }
-        .gradient-text {
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        [x-cloak] { 
-            display: none !important; 
-        }
-    </style>
+         :root{--bg1:#0b1220;--bg2:#0e172a;--acc1:#38bdf8;--acc2:#a78bfa;--acc3:#34d399;--acc4:#f472b6}
+    body{font-family:'Inter',sans-serif;color:#e5e7eb;background:
+      radial-gradient(1200px 600px at 50% -10%,#0b1220,transparent 70%),
+      linear-gradient(180deg,var(--bg1),var(--bg2))}
+    /* griglia soft */
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:
+      radial-gradient(circle at 25px 25px,#ffffff10 2px,transparent 2px) 0 0/50px 50px,
+      radial-gradient(circle at 25px 25px,#ffffff06 1px,transparent 1px) 0 0/25px 25px}
+    header,main,footer{position:relative;z-index:1}
+
+    /* aurora globale dietro all'hero e continua sulle sezioni */
+    .page-aurora{position:fixed;inset:-10% -10% -10% -10%;z-index:0;pointer-events:none;
+      background:
+        radial-gradient(900px 500px at 15% 10%, #22d3ee22, transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, #a78bfa22, transparent 60%),
+        radial-gradient(1000px 600px at 50% 110%, #34d39922, transparent 60%)}
+    .page-aurora::after{content:"";position:absolute;inset:-50%;opacity:.22;
+      background:conic-gradient(from 0deg,var(--acc1),var(--acc2),var(--acc3),var(--acc4),var(--acc1));
+      animation:spin 36s linear infinite}
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    /* testo a gradiente */
+    .gradient-text{
+      background:linear-gradient(90deg,var(--acc1),var(--acc2));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
+    }
+    .gradient-text-hero{
+      background:linear-gradient(90deg,var(--acc1),var(--acc2),var(--acc3));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 6px 24px rgba(56,189,248,.15))
+    }
+
+    /* card vetrose */
+    .card{background:linear-gradient(180deg,#0b1220cc,#0b1220a6);border:1px solid #ffffff12;
+      backdrop-filter:saturate(130%) blur(8px);box-shadow:0 10px 30px #0006, inset 0 1px 0 #ffffff10;
+      transition:transform .25s, box-shadow .25s, border-color .25s}
+    .card:hover{transform:translateY(-6px);border-color:#7dd3fc66;
+      box-shadow:0 14px 40px #0009,0 0 0 1px #0ea5e94d inset,0 0 24px #38bdf820}
+
+    /* pulsanti */
+    .btn-primary{position:relative;overflow:hidden;isolation:isolate;
+      background:linear-gradient(90deg,var(--acc1),var(--acc2));
+      box-shadow:0 10px 24px #38bdf83a, inset 0 1px 0 #ffffff33}
+    .btn-primary::after{content:"";position:absolute;inset:-100% -40% auto -40%;height:200%;
+      background:linear-gradient(90deg,transparent,#ffffff80,transparent);
+      transform:rotate(20deg) translateX(-60%);filter:blur(10px);opacity:0}
+    .btn-primary:hover::after{animation:shine 1.2s ease}
+    @keyframes shine{20%{opacity:.45} to{transform:rotate(20deg) translateX(60%);opacity:0}}
+
+    /* separatori morbidi per sezioni, senza cambiare lo sfondo globale */
+    .section-soft{position:relative}
+    .section-soft::before{content:"";position:absolute;inset:-6rem 0 auto 0;height:6rem;
+      background:radial-gradient(60% 100% at 50% 0%, #22d3ee14, transparent 70%);pointer-events:none}
+
+    .icon-glow{color:#7dd3fc;filter:drop-shadow(0 6px 12px rgba(56,189,248,.35))}
+    .scroll-mt-24{scroll-margin-top:6rem}
+    [x-cloak]{display:none!important}
+</style>
 </head>
-
 <body class="bg-gray-900 text-gray-200 antialiased">
+   <!-- aurora globale -->
+  <div class="page-aurora"></div>
 
-    <!-- Header / Navigazione -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-700">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-tighter gradient-text">Consilium AI</a>
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#metodo" class="hover:text-sky-400 transition-colors">Il Metodo</a>
-                <a href="#servizi" class="hover:text-sky-400 transition-colors">Servizi</a>
-                <a href="#soluzioni" class="hover:text-sky-400 transition-colors">Casi d'Uso</a>
-                <a href="#contatti" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg transition-transform hover:scale-105">Parla con un esperto</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-800">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
+  <!-- Header / Navigazione -->
+  <header class="bg-gray-900/60 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-700">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">      <a href="#" class="text-2xl font-bold tracking-tighter gradient-text">Consilium AI</a>
+      <nav class="hidden md:flex space-x-8 items-center" role="navigation" aria-label="Principale">
+            <a href="#servizi" class="hover:text-sky-400 transition-colors">Servizi</a>
+            <a href="#metodo" class="hover:text-sky-400 transition-colors">Il Metodo</a>
+            <a href="#soluzioni" class="hover:text-sky-400 transition-colors">Casi d'Uso</a>
+            <a href="#contatti" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg transition-transform hover:scale-105">Parla con un esperto</a>
+      </nav>
+      <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-800" aria-controls="mobile-menu" aria-expanded="false" aria-label="Apri menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+      <a href="#metodo" class="block py-2 hover:text-sky-400 transition-colors">Il Metodo</a>
+      <a href="#servizi" class="block py-2 hover:text-sky-400 transition-colors">Servizi</a>
+      <a href="#soluzioni" class="block py-2 hover:text-sky-400 transition-colors">Casi d'Uso</a>
+      <a href="#contatti" class="block mt-2 bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg text-center">Parla con un esperto</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 text-center overflow-hidden section-soft">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 gradient-text-hero">
+          Il tuo migliore analista, in tasca
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          La nostra IA si collega a gestionali, email ed Excel. Clicca un semplice bottone o invia un messaggio su WhatsApp e ricevi un report completo, con grafici e spiegazioni, prima che il caffè sia pronto
+        </p>
+        <a href="#contatti" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform hover:scale-105 inline-block">
+          Inizia da qui
+        </a>
+      </div>
+    </section>
+
+    <!-- Sezione: Aree di Intervento (Servizi) -->
+    <section id="servizi" class="py-20 scroll-mt-24 section-soft">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-white">Un'Offerta Completa per la Tua Trasformazione Digitale</h2>
         </div>
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="#metodo" class="block py-2 hover:text-sky-400 transition-colors">Il Metodo</a>
-            <a href="#servizi" class="block py-2 hover:text-sky-400 transition-colors">Servizi</a>
-            <a href="#soluzioni" class="block py-2 hover:text-sky-400 transition-colors">Casi d'Uso</a>
-            <a href="#contatti" class="block mt-2 bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg text-center">Parla con un esperto</a>
+        <div class="space-y-20 max-w-5xl mx-auto">
+          <!-- Servizio 1: Automazione -->
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Automazione Intelligente dei Processi</h3>
+              <p class="text-gray-400 mb-6">Eliminiamo le attività manuali, lente e ripetitive, potenziando gli strumenti che il tuo team già conosce e utilizza, come Excel.</p>
+              <ul class="space-y-3">
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Chatbot e Agenti AI:</strong> Per automatizzare le comunicazioni su WhatsApp e altri canali.</span></li>
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Potenziamento File Excel:</strong> Integriamo AI e automazioni direttamente nei tuoi fogli di calcolo.</span></li>
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Lettura Automatica Documenti:</strong> Estraiamo dati da PDF, immagini e fatture, azzerando il data entry.</span></li>
+              </ul>
+            </div>
+            <img src="https://placehold.co/600x400/111827/38bdf8?text=Automazione" alt="Automazione dei processi" class="rounded-lg shadow-lg"/>
+          </div>
+
+          <!-- Servizio 2: Dati e BI -->
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <img src="https://placehold.co/600x400/111827/a78bfa?text=Dati+e+BI" alt="Dashboard e dati" class="rounded-lg shadow-lg md:order-last"/>
+            <div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Piattaforma Dati Unificata e BI</h3>
+              <p class="text-gray-400 mb-6">Centralizziamo i tuoi dati dispersi in un'unica fonte di verità, rendendoli accessibili e utili per prendere decisioni rapide.</p>
+              <ul class="space-y-3">
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Integrazione e Centralizzazione:</strong> Creiamo un Data Warehouse unico per tutti i tuoi dati (ERP, CRM, file).</span></li>
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Dashboard e Report Interattivi:</strong> Trasformiamo i numeri in visualizzazioni chiare e aggiornate in tempo reale.</span></li>
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Data Governance e Compliance:</strong> Garantiamo sicurezza, trasparenza e conformità nella gestione dei dati.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Servizio 3: Formazione -->
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Formazione e Abilitazione dei Team</h3>
+              <p class="text-gray-400 mb-6">La tecnologia migliore è inutile se le persone non sanno come usarla. Rendiamo il tuo team autonomo e più efficiente.</p>
+              <ul class="space-y-3">
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Formazione sui Prodotti:</strong> Affianchiamo il tuo team per massimizzare il valore delle soluzioni che creiamo.</span></li>
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Corso "Office AI Boost":</strong> Insegniamo a usare l'AI in Word, Excel e PowerPoint per automatizzare il lavoro.</span></li>
+                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Corsi di AI Generativa:</strong> Dalle basi di ChatGPT alle applicazioni pratiche per il tuo business.</span></li>
+              </ul>
+            </div>
+            <img src="https://placehold.co/600x400/111827/34d399?text=Formazione" alt="Team in formazione" class="rounded-lg shadow-lg"/>
+          </div>
         </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="relative py-20 md:py-32 text-center overflow-hidden">
-            <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
-            <div class="absolute inset-0 gradient-bg opacity-30"></div>
-            <div class="container mx-auto px-6 relative z-10">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
-                    Il tuo migliore analista, in tasca
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                    La nostra IA si collega a gestionali, email ed Excel. Chiedile "Clicca un semplice bottone o invia un messaggio su Whatsapp e ricevi un report completo, con grafici e spiegazioni, prima che il caffè sia pronto
-                </p>
-                <a href="#contatti" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform hover:scale-105 inline-block">
-                    Inizia da qui
-                </a>
-            </div>
-        </section>
-
-        <!-- Sezione: Aree di Intervento (Servizi) -->
-        <section id="servizi" class="py-20 bg-gray-800/40">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Un'Offerta Completa per la Tua Trasformazione Digitale</h2>
-                </div>
-                
-                <div class="space-y-20 max-w-5xl mx-auto">
-                    <!-- Servizio 1: Automazione -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-4">Automazione Intelligente dei Processi</h3>
-                            <p class="text-gray-400 mb-6">Eliminiamo le attività manuali, lente e ripetitive, potenziando gli strumenti che il tuo team già conosce e utilizza, come Excel.</p>
-                            <ul class="space-y-3">
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Chatbot e Agenti AI:</strong> Per automatizzare le comunicazioni su WhatsApp e altri canali.</span></li>
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Potenziamento File Excel:</strong> Integriamo AI e automazioni direttamente nei tuoi fogli di calcolo.</span></li>
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Lettura Automatica Documenti:</strong> Estraiamo dati da PDF, immagini e fatture, azzerando il data entry.</span></li>
-                            </ul>
-                        </div>
-                        <img src="https://placehold.co/600x400/111827/38bdf8?text=Automazione" alt="Immagine rappresentativa dell'automazione" class="rounded-lg shadow-lg">
-                    </div>
-
-                    <!-- Servizio 2: Dati e BI -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <img src="https://placehold.co/600x400/111827/a78bfa?text=Dati+e+BI" alt="Immagine rappresentativa di dashboard e dati" class="rounded-lg shadow-lg md:order-last">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-4">Piattaforma Dati Unificata e BI</h3>
-                            <p class="text-gray-400 mb-6">Centralizziamo i tuoi dati dispersi in un'unica fonte di verità, rendendoli accessibili e utili per prendere decisioni rapide.</p>
-                            <ul class="space-y-3">
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Integrazione e Centralizzazione:</strong> Creiamo un Data Warehouse unico per tutti i tuoi dati (ERP, CRM, file).</span></li>
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Dashboard e Report Interattivi:</strong> Trasformiamo i numeri in visualizzazioni chiare e aggiornate in tempo reale.</span></li>
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Data Governance e Compliance:</strong> Garantiamo sicurezza, trasparenza e conformità nella gestione dei dati.</span></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Servizio 3: Formazione -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-4">Formazione e Abilitazione dei Team</h3>
-                            <p class="text-gray-400 mb-6">La tecnologia migliore è inutile se le persone non sanno come usarla. Rendiamo il tuo team autonomo e più efficiente.</p>
-                            <ul class="space-y-3">
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Formazione sui Prodotti:</strong> Affianchiamo il tuo team per massimizzare il valore delle soluzioni che creiamo.</span></li>
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Corso "Office AI Boost":</strong> Insegniamo a usare l'AI in Word, Excel e PowerPoint per automatizzare il lavoro.</span></li>
-                                <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-sky-400 mr-3 mt-1 flex-shrink-0"></i><span><strong class="text-white">Corsi di AI Generativa:</strong> Dalle basi di ChatGPT alle applicazioni pratiche per il tuo business.</span></li>
-                            </ul>
-                        </div>
-                        <img src="https://placehold.co/600x400/111827/34d399?text=Formazione" alt="Immagine rappresentativa di un team in formazione" class="rounded-lg shadow-lg">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sezione: Il Nostro Metodo -->
-        <section id="metodo" class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Partiamo dai tuoi processi, non dalla tecnologia</h2>
-                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Non vendiamo soluzioni preconfezionate. Ascoltiamo, analizziamo e costruiamo la soluzione su misura per il tuo problema più urgente.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <!-- Card 1 -->
-                    <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
-                            <i data-lucide="search" class="w-8 h-8 text-sky-400"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Analisi sul Campo</h3>
-                        <p class="text-gray-400">Veniamo in azienda e osserviamo i processi reali per individuare i colli di bottiglia che frenano la crescita e causano errori.</p>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
-                            <i data-lucide="rocket" class="w-8 h-8 text-sky-400"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Prototipo Rapido (2-4 settimane)</h3>
-                        <p class="text-gray-400">Sviluppiamo una prima soluzione funzionante sul problema più critico. La testiamo insieme per misurarne l'impatto immediato.</p>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
-                            <i data-lucide="trending-up" class="w-8 h-8 text-sky-400"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Validazione e Crescita</h3>
-                        <p class="text-gray-400">Solo quando i risultati sono concreti e misurabili, estendiamo la soluzione ad altre aree, garantendo un investimento sicuro ed efficace.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sezione: Soluzioni Integrate (Casi d'Uso) -->
-        <section id="soluzioni" class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Molto più della somma delle parti</h2>
-                    <p class="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">È nell'intersezione tra automazione e analytics che creiamo il maggior valore. Ecco alcuni esempi concreti.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Card Caso d'Uso -->
-                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
-                        <div class="mb-4"><i data-lucide="bot" class="w-10 h-10 gradient-text"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Business Intelligence Aumentata</h3>
-                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Migliaia di commenti dei clienti sono impossibili da analizzare manualmente.</p>
-                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Una dashboard che mostra il "sentiment" dei clienti calcolato in tempo reale dalla nostra AI, spiegando il "perché" della loro insoddisfazione.</p>
-                    </div>
-                    <!-- Card Caso d'Uso -->
-                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
-                        <div class="mb-4"><i data-lucide="camera" class="w-10 h-10 gradient-text"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Dalla Foto al KPI Strategico</h3>
-                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> I listini prezzi dei fornitori arrivano solo come foto su WhatsApp.</p>
-                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un sistema che legge i prezzi dalle foto, li struttura e aggiorna istantaneamente la dashboard dei costi di acquisto.</p>
-                    </div>
-                    <!-- Card Caso d'Uso -->
-                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
-                        <div class="mb-4"><i data-lucide="mouse-pointer-click" class="w-10 h-10 gradient-text"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Report "One-Click"</h3>
-                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Ore perse ogni settimana per aggiornare report manualmente.</p>
-                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un bottone in Excel che aggiorna i dati, crea una presentazione PowerPoint e la invia via email. Tutto in pochi secondi.</p>
-                    </div>
-                    <!-- Card Caso d'Uso -->
-                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
-                        <div class="mb-4"><i data-lucide="mic" class="w-10 h-10 gradient-text"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Podcast Giornaliero dei KPI</h3>
-                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Il management non ha tempo di leggere report la mattina.</p>
-                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un podcast audio di 5 minuti, generato in automatico, che riassume i dati della BI, da ascoltare in auto.</p>
-                    </div>
-                    <!-- Card Caso d'Uso -->
-                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
-                        <div class="mb-4"><i data-lucide="file-signature" class="w-10 h-10 gradient-text"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Automazione Commerciale</h3>
-                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Preventivi online lenti e dati dei lead non analizzati.</p>
-                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un preventivatore web istantaneo che genera un PDF e invia i dati in tempo reale alla dashboard vendite.</p>
-                    </div>
-                    <!-- Card Caso d'Uso -->
-                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col">
-                        <div class="mb-4"><i data-lucide="activity" class="w-10 h-10 gradient-text"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Monitoraggio Operativo Live</h3>
-                        <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Mancanza di visibilità sui problemi in produzione in tempo reale.</p>
-                        <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un assistente AI che raccoglie via chat le segnalazioni degli operatori e le mostra su una dashboard per il management.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sezione CTA Finale -->
-        <section id="contatti" class="py-20 bg-gray-800/40">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white">Pronto a ottimizzare il tuo primo processo?</h2>
-                <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto mb-8">
-                    Non serve stravolgere tutta l'azienda. Partiamo da un singolo collo di bottiglia e ti mostriamo risultati concreti in poche settimane.
-                </p>
-                <a href="mailto:antonio@hemz.eu" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform hover:scale-105 inline-block">
-                    Richiedi un'analisi gratuita
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800">
-        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
-            <p>&copy; Consilium AI 2015. Tutti i diritti riservati.</p>
-            <p class="text-sm mt-2">Via Nicolò Pelipario 9 Pesaro | P.IVA 02595530417</p>
+      </div>
+    </section>
+    <div><br><br></div>
+    <!-- Sezione: Il Nostro Metodo -->
+    <section id="metodo" class="py-20 scroll-mt-24 section-soft">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white">Partiamo dai tuoi processi, non dalla tecnologia</h2>
+          <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Non vendiamo soluzioni preconfezionate. Ascoltiamo, analizziamo e costruiamo la soluzione su misura per il tuo problema più urgente.</p>
         </div>
-    </footer>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          <!-- Card 1 -->
+          <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2 card">
+            <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
+              <i data-lucide="search" class="w-8 h-8 text-sky-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Analisi sul Campo</h3>
+            <p class="text-gray-400">Veniamo in azienda e osserviamo i processi reali per individuare i colli di bottiglia che frenano la crescita e causano errori.</p>
+          </div>
+          <!-- Card 2 -->
+          <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2 card">
+            <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
+              <i data-lucide="rocket" class="w-8 h-8 text-sky-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Prototipo Rapido (2-4 settimane)</h3>
+            <p class="text-gray-400">Sviluppiamo una prima soluzione funzionante sul problema più critico. La testiamo insieme per misurarne l'impatto immediato.</p>
+          </div>
+          <!-- Card 3 -->
+          <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 hover:border-sky-500 transition-all duration-300 transform hover:-translate-y-2 card">
+            <div class="inline-block p-4 bg-gray-700 rounded-full mb-4">
+              <i data-lucide="trending-up" class="w-8 h-8 text-sky-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Validazione e Crescita</h3>
+            <p class="text-gray-400">Solo quando i risultati sono concreti e misurabili, estendiamo la soluzione ad altre aree, garantendo un investimento sicuro ed efficace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div><br><br></div>
 
-    <!-- Script per AlpineJS (Tabs) e Lucide Icons e menu mobile -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script>
-        lucide.createIcons();
+    <!-- Sezione: Soluzioni Integrate (Casi d'Uso) -->
+    <section id="soluzioni" class="py-20 scroll-mt-24 section-soft">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white">Molto più della somma delle parti</h2>
+          <p class="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">È nell'intersezione tra automazione e analytics che creiamo il maggior valore. Ecco alcuni esempi concreti.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Cards -->
+          <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col card">
+            <div class="mb-4"><i data-lucide="bot" class="w-10 h-10 gradient-text"></i></div>
+            <h3 class="text-xl font-bold text-white mb-2">Business Intelligence Aumentata</h3>
+            <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Migliaia di commenti dei clienti sono impossibili da analizzare manualmente.</p>
+            <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Una dashboard che mostra il "sentiment" dei clienti calcolato in tempo reale dalla nostra AI, spiegando il "perché" della loro insoddisfazione.</p>
+          </div>
 
-        // Menu mobile
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+          <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col card">
+            <div class="mb-4"><i data-lucide="camera" class="w-10 h-10 gradient-text"></i></div>
+            <h3 class="text-xl font-bold text-white mb-2">Dalla Foto al KPI Strategico</h3>
+            <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> I listini prezzi dei fornitori arrivano solo come foto su WhatsApp.</p>
+            <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un sistema che legge i prezzi dalle foto, li struttura e aggiorna istantaneamente la dashboard dei costi di acquisto.</p>
+          </div>
+
+          <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col card">
+            <div class="mb-4"><i data-lucide="mouse-pointer-click" class="w-10 h-10 gradient-text"></i></div>
+            <h3 class="text-xl font-bold text-white mb-2">Report "One-Click"</h3>
+            <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Ore perse ogni settimana per aggiornare report manualmente.</p>
+            <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un bottone in Excel che aggiorna i dati, crea una presentazione PowerPoint e la invia via email. Tutto in pochi secondi.</p>
+          </div>
+
+          <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col card">
+            <div class="mb-4"><i data-lucide="mic" class="w-10 h-10 gradient-text"></i></div>
+            <h3 class="text-xl font-bold text-white mb-2">Podcast Giornaliero dei KPI</h3>
+            <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Il management non ha tempo di leggere report la mattina.</p>
+            <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un podcast audio di 5 minuti, generato in automatico, che riassume i dati della BI, da ascoltare in auto.</p>
+          </div>
+
+          <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col card">
+            <div class="mb-4"><i data-lucide="file-signature" class="w-10 h-10 gradient-text"></i></div>
+            <h3 class="text-xl font-bold text-white mb-2">Automazione Commerciale</h3>
+            <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Preventivi online lenti e dati dei lead non analizzati.</p>
+            <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un preventivatore web istantaneo che genera un PDF e invia i dati in tempo reale alla dashboard vendite.</p>
+          </div>
+
+          <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col card">
+            <div class="mb-4"><i data-lucide="activity" class="w-10 h-10 gradient-text"></i></div>
+            <h3 class="text-xl font-bold text-white mb-2">Monitoraggio Operativo Live</h3>
+            <p class="text-gray-400 mb-1"><strong class="text-gray-300">Problema:</strong> Mancanza di visibilità sui problemi in produzione in tempo reale.</p>
+            <p class="text-gray-300"><strong class="text-sky-400">Soluzione:</strong> Un assistente AI che raccoglie via chat le segnalazioni degli operatori e le mostra su una dashboard per il management.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div><br><br></div>
+
+    <!-- Sezione CTA Finale -->
+    <section id="contatti" class="py-20 scroll-mt-24 section-soft">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white">Pronto a ottimizzare il tuo primo processo?</h2>
+        <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto mb-8">
+          Non serve stravolgere tutta l'azienda. Partiamo da un singolo collo di bottiglia e ti mostriamo risultati concreti in poche settimane.
+        </p>
+        <a href="mailto:antonio@hemz.eu" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform hover:scale-105 inline-block">
+          Richiedi un'analisi gratuita
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-800">
+    <div class="container mx-auto px-6 py-8 text-center text-gray-100">
+      <p>&copy; <span id="year"></span> Consilium AI. Tutti i diritti riservati.</p>
+      <p class="text-sm mt-2">Via Nicolò Pelipario 9 Pesaro | P.IVA 02595530417</p>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script>
+    // Init icons when DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      // Footer year
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+
+    // Menu mobile
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
+    });
+  </script>
 </body>
-
 </html>
